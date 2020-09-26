@@ -1,0 +1,64 @@
+version: "3.7"
+services:
+  nginx:
+    image: nginx:alpine
+    volumes:
+      - website:/var/www
+    ports:
+      # CHANGE TO "80:80" IF USING NGINX FOR SSL TERMINATION
+      - "9080:80"
+      # UNCOMMENT IF USING NGINX FOR SSL TERMINATION
+      # - "443:443"
+    configs:
+      - source: website_vhost
+        target: /etc/nginx/conf.d/default.conf
+    # UNCOMMENT IF USING NGINX FOR SSL TERMINATION
+    # secrets:
+    #   - source: yourdomain.com.crt
+    #     target: /etc/nginx/certs/yourdomain.com.crt
+    #   - source: yourdomain.com.key
+    #     target: /etc/nginx/certs/yourdomain.com.key
+
+  githugo:
+    image: zeigren/githugo:latest
+    volumes:
+      - website:/git
+    # UNCOMMENT IF USING A REPO WITH SSH
+    # secrets:
+    #   - source: ssh_private
+    #     target: /root/.ssh/id_rsa
+    #     mode: 0400
+    #   - source: ssh_public
+    #     target: /root/.ssh/id_rsa.pub
+    #     mode: 0444
+    #   - source: remote_ssh
+    #     target: /root/.ssh/known_hosts
+    environment:
+      - REPO=LINK_TO_GIT_REPO
+      - FOLDER=GIT_REPO_NAME
+    deploy:
+      restart_policy:
+        # UNCOMMENT DELAY AND COMMENT CONDITION IF YOU WANT IT TO PERIODICALLY REBUILD
+        condition: none
+        # delay: 4h
+
+volumes:
+  website:
+
+configs:
+  website_vhost:
+    external: true
+
+# secrets:
+  # UNCOMMENT IF USING NGINX FOR SSL TERMINATION
+  # yourdomain.com.crt:
+  #   external: true
+  # yourdomain.com.key:
+  #   external: true
+  # UNCOMMENT IF USING A REPO WITH SSH
+  # ssh_private:
+  #   external: true
+  # ssh_public:
+  #   external: true
+  # remote_ssh:
+  #   external: true
