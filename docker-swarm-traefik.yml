@@ -27,7 +27,7 @@ services:
         - "traefik.http.middlewares.website.headers.stsseconds=315360000"
         - "traefik.http.services.website.loadbalancer.passhostheader=true"
         - "traefik.http.middlewares.website.headers.sslforcehost=true"
-        - "traefik.http.middlewares.website.headers.sslhost=website.com"
+        - "traefik.http.middlewares.website.headers.sslhost=yourdomain.com"
         - "traefik.http.middlewares.website.headers.browserxssfilter=true"
         - "traefik.http.middlewares.website.headers.contenttypenosniff=true"
         - "traefik.http.middlewares.website.headers.forcestsheader=true"

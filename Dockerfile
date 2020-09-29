@@ -16,7 +16,8 @@ LABEL org.label-schema.schema-version="1.0" \
     org.label-schema.vcs-branch=$BRANCH \
     org.label-schema.vcs-ref=$COMMIT
 
-RUN apk --update add --no-cache git less openssh hugo=$VERSION \
+RUN echo "@edge http://nl.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
+    && apk --update add --no-cache git less openssh hugo@edge=$VERSION \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /git
