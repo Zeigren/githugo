@@ -1,7 +1,7 @@
 # Docker Stack For Deploying A Website Using Hugo And Git
 
 [![DockerHub](https://img.shields.io/docker/cloud/build/zeigren/githugo)](https://hub.docker.com/r/zeigren/githugo)
-[![MicroBadger](https://images.microbadger.com/badges/image/zeigren/githugo.svg)](https://microbadger.com/images/zeigren/githugo)
+![Docker Image Size (latest)](https://img.shields.io/docker/image-size/zeigren/githugo/latest)
 [![MicroBadger](https://images.microbadger.com/badges/version/zeigren/githugo.svg)](https://microbadger.com/images/zeigren/githugo)
 [![MicroBadger](https://images.microbadger.com/badges/commit/zeigren/githugo.svg)](https://microbadger.com/images/zeigren/githugo)
 ![Docker Pulls](https://img.shields.io/docker/pulls/zeigren/githugo)
@@ -12,6 +12,8 @@ githugo clones a remote git repository, builds it with [Hugo](https://gohugo.io/
 
 ## Tags (corresponds to Hugo version)
 
+- 0.81.0-r0
+- 0.75.1-r0
 - 0.71.1-r0
 
 ## Stack
