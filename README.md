@@ -12,6 +12,7 @@ githugo clones a remote git repository, builds it with [Hugo](https://gohugo.io/
 
 ## Tags (corresponds to Hugo version)
 
+- 0.82.0-r0
 - 0.81.0-r0
 - 0.75.1-r0
 - 0.71.1-r0
