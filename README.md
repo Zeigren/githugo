@@ -1,17 +1,15 @@
 # Docker Stack For Deploying A Website Using Hugo And Git
 
-[![DockerHub](https://img.shields.io/docker/cloud/build/zeigren/githugo)](https://hub.docker.com/r/zeigren/githugo)
 ![Docker Image Size (latest)](https://img.shields.io/docker/image-size/zeigren/githugo/latest)
-[![MicroBadger](https://images.microbadger.com/badges/version/zeigren/githugo.svg)](https://microbadger.com/images/zeigren/githugo)
-[![MicroBadger](https://images.microbadger.com/badges/commit/zeigren/githugo.svg)](https://microbadger.com/images/zeigren/githugo)
 ![Docker Pulls](https://img.shields.io/docker/pulls/zeigren/githugo)
 
 ## Usage
 
-githugo clones a remote git repository, builds it with [Hugo](https://gohugo.io/), and then hosts it using NGINX.
+githugo clones a remote git repository, builds it with [Hugo](https://gohugo.io/), and then hosts it using NGINX. Use [Docker Compose](https://docs.docker.com/compose/) or [Docker Swarm](https://docs.docker.com/engine/swarm/) to deploy. There are examples for using NGINX or Traefik for SSL termination, or don't use SSL at all.
 
 ## Tags (corresponds to Hugo version)
 
+- 0.83.1-r1
 - 0.82.0-r0
 - 0.81.0-r0
 - 0.75.1-r0
@@ -32,7 +30,7 @@ githugo clones a remote git repository, builds it with [Hugo](https://gohugo.io/
 
 Configuration consists of environment variables in the `.yml` and `.conf` files.
 
-- website_vhost = The nginx vhost file for your website (templates included, simply replace all instances of `yourdomain.com` and `GIT_REPO_NAME`, use `website_vhost_ssl` if you're using NGINX for SSL termination)
+- website_nginx.conf = NGINX config file (only needs to be modified if you're using NGINX for SSL termination)
 - Make whatever changes you need to the appropriate `.yml` (replace all instances of `yourdomain`, `LINK_TO_GIT_REPO`, `GIT_REPO_NAME`).
 
 ### Using A Git Repo With SSH
@@ -43,8 +41,8 @@ Configuration consists of environment variables in the `.yml` and `.conf` files.
 
 ### Using NGINX for SSL Termination
 
-- yourdomain.com.crt = The SSL certificate for your domain (you'll need to create/copy this)
-- yourdomain.com.key = The SSL key for your domain (you'll need to create/copy this)
+- yourdomain.test.crt = The SSL certificate for your domain (you'll need to create/copy this)
+- yourdomain.test.key = The SSL key for your domain (you'll need to create/copy this)
 
 ### [Docker Swarm](https://docs.docker.com/engine/swarm/)
 
@@ -56,6 +54,6 @@ Run with `docker stack deploy --compose-file docker-swarm.yml website`
 
 ### [Docker Compose](https://docs.docker.com/compose/)
 
-You'll need to create a `config` folder and put the relevant configuration files you created/modified into it.
+You'll need to create a `config` folder and put `website_nginx.conf` in it, if you're using NGINX for SSL also put your SSL certificate and SSL key in it.
 
-Run with `docker-compose up -d`. View using `yourdomain.com:9080` or `127.0.0.1:9080`.
+Run with `docker-compose up -d`. View using `yourdomain.test:9080` or `127.0.0.1:9080`.
