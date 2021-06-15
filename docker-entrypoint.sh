@@ -5,4 +5,4 @@ set -ex
 git ls-remote ${REPO}
 rm -rf ${FOLDER}
 git clone ${REPO}
-cd ${FOLDER} && hugo
+cd ${FOLDER} && hugo ${HUGO_FLAGS:---minify}
